@@ -2,8 +2,13 @@
 #define SEARCHGROUPFRAGMENT_H
 
 #include <base/basefragment.h>
+#include <QLabel>
+#include <QLineEdit>
 #include <QObject>
+#include <QPushButton>
+#include <QSettings>
 #include <QVBoxLayout>
+#include <QWidget>
 
 
 
@@ -15,7 +20,32 @@ private:
     QVBoxLayout *mainVLayout;
 
 public:
+//    void resizeEvent(QResizeEvent *event) override;
+
     LoginFragment();
+
+    void checkMainWindow();
+
+    QLabel *passwordLabel;
+    QLabel *loginLabel;
+
+    QSettings *settings;
+
+    QLineEdit *loginEdit;
+    QLineEdit *passwordEdit;
+
+    QPushButton *loginButton;
+
+    QString username;
+    QString password;
+
+
+    bool tokenStatus;
+
+    bool ifExist{};
+public slots:
+
+//    void openMainWindow();
 
 };
 

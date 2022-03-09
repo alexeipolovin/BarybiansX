@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/drawable">
         <file>splash.svg</file>
+        <file>flex.png</file>
     </qresource>
 </RCC>

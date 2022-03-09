@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
         container->setStyleSheet(mainStyle);
         container->setObjectName("window");
 
-        this->setWindowTitle("Mai Расписание");
+        this->setWindowTitle("BarybiansX");
 //        this->setWindowIcon(QIcon(":/resc/resc/splash.svg"));
         this->resize(QDesktopWidget().availableGeometry(this).size() * 0.86);
         this->setCentralWidget(container);

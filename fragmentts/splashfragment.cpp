@@ -1,6 +1,7 @@
 #include "splashfragment.h"
 
 #include <QDebug>
+#include <QLabel>
 #include <QSvgWidget>
 #include <QTimer>
 using namespace screens;
@@ -13,7 +14,11 @@ using namespace screens;
 SplashFragment::SplashFragment() {
     QVBoxLayout *mainVLayout = new QVBoxLayout;
     QHBoxLayout *mainHLayout = new QHBoxLayout;
-    QSvgWidget *centerConainer = new QSvgWidget(":/drawable/splash.svg");
+    this->setStyleSheet("QFrame {background-color:#1e2327;}");
+//    QSvgWidget *centerConainer = new QSvgWidget(":/drawable/splash.svg");
+    QLabel *centerConainer = new QLabel();
+    QPixmap pixmap(":/drawable/flex.png");
+    centerConainer->setPixmap(pixmap);
 
 
 //    centerConainer->setStyleSheet(SPLASH_ICON);

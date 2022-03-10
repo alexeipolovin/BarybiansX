@@ -18,6 +18,8 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
         return new SplashFragment;
     } else if (tag == LOGIN) {
         return new LoginFragment;
+    } else if(tag == USER_PAGE){
+        return new UserFragment;
     } else {
         return nullptr;
     }

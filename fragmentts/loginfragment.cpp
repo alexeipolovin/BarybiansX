@@ -41,6 +41,7 @@ LoginFragment::LoginFragment() {
     ifExist = false;
 
     settings = new QSettings("settings.ini", QSettings::IniFormat); // создаётся/открывается файл настроек
+    webConnector = new WebConnector(false);
 
     if (settings->value("login").toString() != "" and settings->value("passwd").toString() != "") // если в файле настроек находятся переменные отвечающие за логин, то они считываются
     {
@@ -173,10 +174,16 @@ LoginFragment::LoginFragment() {
     this->setLayout(mainLayout);
 
 
-//    connect(loginButton, SIGNAL(clicked()), SLOT(openMainWindow()));
+    connect(loginButton, SIGNAL(clicked()), SLOT(sendAuthRequest));
 }
 
+void LoginFragment::openMainWindow() {
+    emit newRootScreen(USER_PAGE);
+}
 
+void LoginFragment::sendAuthRequest() {
+    webConnector->setLoginAndPassword(this->loginEdit->text(), this->passwordEdit->text());
+}
 
 /**
   * @brief LoginFragment::resizeEvent

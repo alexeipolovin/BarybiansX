@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <base/utils/webconnector.h>
 
 
 
@@ -18,6 +19,7 @@ class LoginFragment: public BaseFragment {
 
 private:
     QVBoxLayout *mainVLayout;
+    WebConnector *webConnector;
 
 public:
 //    void resizeEvent(QResizeEvent *event) override;
@@ -44,8 +46,8 @@ public:
 
     bool ifExist{};
 public slots:
-
-//    void openMainWindow();
+    void sendAuthRequest();
+    void openMainWindow();
 
 };
 

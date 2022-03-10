@@ -1,4 +1,4 @@
-QT       += core gui svg
+QT       += core gui svg network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,8 +17,11 @@ SOURCES += \
     cwidgets/slidingstackedwidget.cpp \
     fragmentts/loginfragment.cpp \
     fragmentts/splashfragment.cpp \
+    fragmentts/userpage.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    base/utils/webconnector.cpp \
+    base/data/data.cpp
 
 HEADERS += \
     base/basefragment.h \
@@ -29,8 +32,11 @@ HEADERS += \
     cwidgets/slidingstackedwidget.h \
     fragmentts/loginfragment.h \
     fragmentts/splashfragment.h \
-    mainwindow.h
-
+    fragmentts/userpage.h \
+    mainwindow.h \
+    base/utils/webconnector.h \
+    bse/data/data.h \
+ICON=appicon.icns
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

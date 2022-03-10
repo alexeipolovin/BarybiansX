@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
         container->setObjectName("window");
 
         this->setWindowTitle("BarybiansX");
-//        this->setWindowIcon(QIcon(":/resc/resc/splash.svg"));
+        this->setWindowIcon(QIcon(":/drawable/flex.png"));
         this->resize(QDesktopWidget().availableGeometry(this).size() * 0.86);
         this->setCentralWidget(container);
     } catch (std::exception& e) {

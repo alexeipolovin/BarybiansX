@@ -48,6 +48,7 @@ public:
 public slots:
     void sendAuthRequest();
     void openMainWindow();
+    void showTokenError();
 
 };
 

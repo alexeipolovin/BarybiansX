@@ -13,11 +13,15 @@ SOURCES += \
     base/basefragmentfactory.cpp \
     base/basemodel.cpp \
     base/router.cpp \
+    cwidgets/addition/cardwidget.cpp \
+    cwidgets/addition/menuheaderwidget.cpp \
+    cwidgets/cardview.cpp \
     cwidgets/implfragmentfactory.cpp \
     cwidgets/slidingstackedwidget.cpp \
     fragmentts/loginfragment.cpp \
     fragmentts/splashfragment.cpp \
-    fragmentts/userpage.cpp \
+    fragmentts/userfragment.cpp \
+    fragmentts/userpagefragment.cpp \
     main.cpp \
     mainwindow.cpp \
     base/utils/webconnector.cpp \
@@ -28,11 +32,15 @@ HEADERS += \
     base/basefragmentfactory.h \
     base/basemodel.h \
     base/router.h \
+    cwidgets/addition/cardwidget.h \
+    cwidgets/addition/menuheaderwidget.h \
+    cwidgets/cardview.h \
     cwidgets/implfragmentfactory.h \
     cwidgets/slidingstackedwidget.h \
     fragmentts/loginfragment.h \
     fragmentts/splashfragment.h \
-    fragmentts/userpage.h \
+    fragmentts/userfragment.h \
+    fragmentts/userpagefragment.h \
     mainwindow.h \
     base/utils/webconnector.h \
     bse/data/data.h \

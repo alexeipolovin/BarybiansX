@@ -1,10 +1,3 @@
-//#include <QHttpMultiPart>
-//#include <QUrlQuery>
-//#include <QNetworkReply>
-//#include <QString>
-//#include <QJsonDocument>
-//#include <QJsonObject>
-//#include <QJsonArray>
 #include <QWidget>
 #include <QNetworkAccessManager>
 #include "data.h"
@@ -20,7 +13,7 @@ const QString END_LINE = "\n";
   *
 */
 
-User::User() {
+User::User(): BaseModel() {
 
 }
 

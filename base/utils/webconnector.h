@@ -24,10 +24,11 @@ public:
         ALL_MESSAGES,
         DIALOG_WITH,
         SEND_MESSAGE,
+        SPECIFIC_FEED,
     };
 
     User *mainUser;
-    User &getMainUser() const;
+    User getMainUser() const;
 
     QString token;
 
@@ -70,6 +71,8 @@ public:
 
     void writePost(QString title, QString text);
     void sendPostRequest(QNetworkRequest request, WebConnector::REQUEST_TYPE type);
+    User *getMainUser();
+    QVector<Post *> getSpecificFeed(int userId);
 private:
     QByteArray sendingData;
 
@@ -95,6 +98,7 @@ signals:
     void feedOk();
     void valueChanged(QString &token);
     void messageListReceived();
+    void tokenError();
 };
 
 #endif // WEBCONNECTOR_H

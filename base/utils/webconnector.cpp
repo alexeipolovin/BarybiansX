@@ -201,7 +201,7 @@ QNetworkRequest WebConnector::createRequest(const QString &url, WebConnector::RE
  * */
 
 void WebConnector::makeAuth() {
-    QNetworkRequest request = this->createRequest("https://barybians.ru/api/auth", WebConnector::AUTH);
+    QNetworkRequest request = this->createRequest("https://api.barybians.ru/v2/auth", WebConnector::AUTH);
     this->sendRequest(request, WebConnector::AUTH);
 }
 
@@ -230,6 +230,19 @@ void WebConnector::cachePhoto(QNetworkReply *reply_photo, const QNetworkRequest 
     }
 }
 
+/**
+ * @brief WebConnector::parseReply
+ *
+ * @author Polovin Alexei
+ *
+ * @param &reply - ответ, который нужно разобрать
+ * @param type - тип отправленного запроса
+ * @param &request - запрос
+ *
+ * @returns QJsonObject - объект json
+ *
+ * Метод для разбора ответа сервера, вызывается когда пришёл ответ на запрос
+*/
 QJsonObject
 WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, const QNetworkRequest &request) {
     //TODO: Вынести это в отдельный класс
@@ -337,7 +350,10 @@ WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, 
                 settings->setValue("token", this->token);
                 bearerToken = ("Bearer " + token).toUtf8();
             }
-            emit valueChanged(this->token);
+            if(this->token != "false")
+                emit valueChanged(this->token);
+            else
+                emit tokenError();
             break;
         }
         case GET_FEED: {
@@ -454,9 +470,11 @@ QString WebConnector::getToken() const {
     return this->token;
 }
 
+QVector <Post *> WebConnector::getSpecificFeed(int userId) {
+}
 
-User &WebConnector::getMainUser() const {
-    return *this->mainUser;
+User *WebConnector::getMainUser() {
+    return this->mainUser;
 }
 
 void WebConnector::clearMessageList() {

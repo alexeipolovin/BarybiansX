@@ -3,9 +3,11 @@
 
 #include <QPixmap>
 #include <QString>
+
+#include <base/basemodel.h>
 //TODO Разнести в разные файлы или убрать в один класс Data(полная хуйня)
 
-class User {
+class User: public BaseModel {
 public:
     QPixmap profilePhoto;
     QString photoName;

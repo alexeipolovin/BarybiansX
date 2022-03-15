@@ -4,6 +4,8 @@
 
 #include <fragmentts/loginfragment.h>
 #include <fragmentts/splashfragment.h>
+#include <fragmentts/userfragment.h>
+#include <fragmentts/userpagefragment.h>
 
 
 
@@ -19,7 +21,7 @@ BaseFragment* ImplFragmentFactory::create(QString tag) {
     } else if (tag == LOGIN) {
         return new LoginFragment;
     } else if(tag == USER_PAGE){
-        return new UserFragment;
+        return new UserPageFragment;
     } else {
         return nullptr;
     }

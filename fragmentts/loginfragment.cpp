@@ -2,6 +2,7 @@
 
 #include <QGraphicsOpacityEffect>
 #include <QLineEdit>
+#include <QMessageBox>
 #include <QPalette>
 #include <QPixmap>
 #include <QPropertyAnimation>
@@ -41,7 +42,7 @@ LoginFragment::LoginFragment() {
     ifExist = false;
 
     settings = new QSettings("settings.ini", QSettings::IniFormat); // создаётся/открывается файл настроек
-    webConnector = new WebConnector(false);
+    webConnector = new WebConnector(true);
 
     if (settings->value("login").toString() != "" and settings->value("passwd").toString() != "") // если в файле настроек находятся переменные отвечающие за логин, то они считываются
     {
@@ -83,8 +84,8 @@ LoginFragment::LoginFragment() {
 
     QPalette buttonPalette;
 
-    buttonPalette.setBrush(QPalette::Background, buttonGradient);
-    loginButton->setPalette(buttonPalette);
+//    buttonPalette.setBrush(QPalette::Background, buttonGradient);
+//    loginButton->setPalette(buttonPalette);
 
     QString centerQSS = "QFrame "
                         "{"
@@ -108,18 +109,18 @@ LoginFragment::LoginFragment() {
                             "background-color:#1e2327;"
                             "}";
 
-    QString buttonStyle = "QPushButton"
-                          "{"
-                          "color: white;"
-                          "background-color: black;"
-                          "margin-bottom:20px;"
-                          "margin-top:20px;"
-                          "border:none;"
-                          "height:20px;"
-                          "width:100px;"
-                          "padding:5px;"
-                          "border-radius: 10px;"
-                          "}";
+//    QString buttonStyle = "QPushButton"
+//                          "{"
+//                          "color: white;"
+//                          "background-color: black;"
+//                          "margin-bottom:20px;"
+//                          "margin-top:20px;"
+//                          "border:none;"
+//                          "height:20px;"
+//                          "width:100px;"
+//                          "padding:5px;"
+//                          "border-radius: 10px;"
+//                          "}";
     QString labelStyle = "QLabel "
                          "{"
                          "color: black;"
@@ -152,7 +153,7 @@ LoginFragment::LoginFragment() {
     buttonContainer->addWidget(loginButton);
     buttonContainer->setAlignment(Qt::AlignCenter);
 
-    loginButton->setStyleSheet(buttonStyle);
+//    loginButton->setStyleSheet(buttonStyle);
     loginButton->setFont(QFont("Arial", 12));
 
     centerLayout->addWidget(logoIcon);
@@ -172,17 +173,26 @@ LoginFragment::LoginFragment() {
     mainLayout->setAlignment(Qt::AlignCenter);
 
     this->setLayout(mainLayout);
+    loginButton->setEnabled(true);
 
+    connect(loginButton, &QPushButton::clicked, this,  &LoginFragment::sendAuthRequest);
+    connect(webConnector, &WebConnector::valueChanged, this, &LoginFragment::openMainWindow);
+    connect(webConnector, &WebConnector::tokenError, this, &LoginFragment::showTokenError);
+}
 
-    connect(loginButton, SIGNAL(clicked()), SLOT(sendAuthRequest));
+void LoginFragment::showTokenError() {
+    QMessageBox::warning(this, "Ошибка авторизации", "Проверьте логин или пароль",
+                                   QMessageBox::Cancel);
 }
 
 void LoginFragment::openMainWindow() {
-    emit newRootScreen(USER_PAGE);
+    emit replaceWhithData(USER_PAGE, this->webConnector->getMainUser());
+//    emit newRootScreen(USER_PAGE);
 }
 
 void LoginFragment::sendAuthRequest() {
     webConnector->setLoginAndPassword(this->loginEdit->text(), this->passwordEdit->text());
+    webConnector->makeAuth();
 }
 
 /**

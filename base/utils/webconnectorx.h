@@ -4,20 +4,16 @@
 #include "requestx.h"
 
 #include <QNetworkAccessManager>
-
-
+#include <base/data/constants.h>
 
 class WebConnectorX
 {
 public:
-    enum REQUEST_TYPE {
-        AUTH,
-    };
     WebConnectorX(bool showDebug = false);
 
     void sendAuth(QString login, QString password);
 
-    RequestX *createRequest(WebConnectorX::REQUEST_TYPE type);
+    RequestX *createRequest(REQUEST_TYPE type);
     void sendRequest(RequestX *requester);
 private:
     QNetworkAccessManager *manager;

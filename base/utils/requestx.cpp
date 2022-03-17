@@ -1,7 +1,7 @@
 #include "requestx.h"
 
 
-RequestX::RequestX(QString url, WebConnectorX::REQUEST_TYPE type)
+RequestX::RequestX(QString url, REQUEST_TYPE type)
 {
     this->url = url;
     this->setUrl(this->url);
@@ -38,12 +38,12 @@ void RequestX::setId(int newId)
     id = newId;
 }
 
-WebConnectorX::REQUEST_TYPE RequestX::getType() const
+REQUEST_TYPE RequestX::getType() const
 {
     return type;
 }
 
-void RequestX::setType(WebConnectorX::REQUEST_TYPE newType)
+void RequestX::setType(REQUEST_TYPE newType)
 {
     type = newType;
 }

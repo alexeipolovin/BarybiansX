@@ -4,7 +4,7 @@
 #include "base/data/data.h"
 
 #include <QtNetwork/QNetworkAccessManager>
-#include <QSettings>
+#include <QSettings>§
 
 
 class WebConnector : public QObject {

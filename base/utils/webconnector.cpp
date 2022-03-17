@@ -243,7 +243,7 @@ void WebConnector::cachePhoto(QNetworkReply *reply_photo, const QNetworkRequest 
  *
  * Метод для разбора ответа сервера, вызывается когда пришёл ответ на запрос
 */
-QJsonObject
+QJsonObject§
 WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, const QNetworkRequest &request) {
     //TODO: Вынести это в отдельный класс
     QJsonObject root;

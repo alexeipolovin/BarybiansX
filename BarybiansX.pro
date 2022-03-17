@@ -13,6 +13,8 @@ SOURCES += \
     base/basefragmentfactory.cpp \
     base/basemodel.cpp \
     base/router.cpp \
+    base/utils/requestx.cpp \
+    base/utils/webconnectorx.cpp \
     cwidgets/addition/cardwidget.cpp \
     cwidgets/addition/menuheaderwidget.cpp \
     cwidgets/cardview.cpp \
@@ -31,7 +33,10 @@ HEADERS += \
     base/basefragment.h \
     base/basefragmentfactory.h \
     base/basemodel.h \
+    base/data/constants.h \
     base/router.h \
+    base/utils/requestx.h \
+    base/utils/webconnectorx.h \
     cwidgets/addition/cardwidget.h \
     cwidgets/addition/menuheaderwidget.h \
     cwidgets/cardview.h \
@@ -43,7 +48,7 @@ HEADERS += \
     fragmentts/userpagefragment.h \
     mainwindow.h \
     base/utils/webconnector.h \
-    bse/data/data.h \
+    base/data/data.h \
 ICON=appicon.icns
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

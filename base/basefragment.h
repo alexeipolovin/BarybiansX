@@ -7,6 +7,8 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <base/utils/webconnector.h>
+
 /**
  * @brief The BaseFragment class
  *
@@ -56,6 +58,7 @@ public:
      * @param model модель данных
      */
     virtual void bindData(BaseModel* model);
+    void bindWebConnector(WebConnector *webConnector);
 };
 
 #endif // BASEFRAGMENT_H

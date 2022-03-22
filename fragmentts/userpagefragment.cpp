@@ -99,13 +99,6 @@ UserPageFragment::UserPageFragment()
     headerLayout = new QVBoxLayout;
     headerLayout->setAlignment(Qt::AlignLeft);
     headerLayout->setContentsMargins(20, 20, 20, 20);
-    menuHeaderCard->setLayout(headerLayout);
-
-    QPushButton *backButton = new QPushButton("Back");
-    headerLayout->addWidget(backButton);
-    connect(backButton, &QPushButton::clicked, this, [this]() {
-        emit back();
-    });
 
 
     profilelay->addWidget(lastVisit);
@@ -122,28 +115,32 @@ UserPageFragment::UserPageFragment()
 
 void UserPageFragment::downloadFeed() {
     WebConnector *webConnector = new WebConnector();
-    webConnector->setLoginAndPassword("Kernux", "qetuo123");
+    QSettings *settings = new QSettings();
+    webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
     webConnector->makeAuth();
     connect(webConnector, &WebConnector::valueChanged, this, [this, webConnector]() {
         QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru​​/v2/posts", WebConnector::GET_FEED);
     webConnector->sendRequest(request, WebConnector::GET_FEED);
     connect(webConnector, &WebConnector::feedOk, this, [this, webConnector]() {
        QVector<Post*> *secVec = webConnector->getFeed();
+
        for(auto i : *secVec) {
            qDebug() << i->userId;
            if(i->userId == webConnector->mainUser->id) {
                qDebug() << "KEKEKEKEKE";
-            CardWidget *widget = new CardWidget();
-            QVBoxLayout *layout = new QVBoxLayout();
+            CardWidget *widget = new CardWidget(this);
+            QVBoxLayout *layout = new QVBoxLayout(this);
             layout->addWidget(new QLabel(i->title));
             layout->addWidget(new QLabel(i->text));
             widget->setLayout(layout);
             menuContainer->addWidget(widget);
            }
        }
+       delete webConnector;
        this->setLayout(scrollContainerLayout);
     });
 });
+    delete settings;
 }
 void UserPageFragment::bindData(BaseModel *model) {
     User *mainUser = (User *) model;

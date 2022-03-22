@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
                             "background-color:white;"
                             "}";
         container->setStyleSheet(mainStyle);
-        container->setObjectName("window");
 
         this->setWindowTitle("BarybiansX");
         this->setWindowIcon(QIcon(":/drawable/flex.png"));

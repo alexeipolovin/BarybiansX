@@ -173,10 +173,17 @@ LoginFragment::LoginFragment() {
     mainLayout->setAlignment(Qt::AlignCenter);
 
     this->setLayout(mainLayout);
-    loginButton->setEnabled(true);
-
-    connect(loginButton, &QPushButton::clicked, this,  &LoginFragment::sendAuthRequest);
+    QSettings *settings = new QSettings();
+    if(settings->value("LOGIN").toString() != "" && settings->value("PASSWORD").toString() != "") {
+        webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
+        webConnector->checkAuth();
+        openMainWindow();
+//        loginButton->setEnabled(false);
+    } else {
+        loginButton->setEnabled(true);
+    }
     connect(webConnector, &WebConnector::valueChanged, this, &LoginFragment::openMainWindow);
+    connect(loginButton, &QPushButton::clicked, this,  &LoginFragment::sendAuthRequest);
     connect(webConnector, &WebConnector::tokenError, this, &LoginFragment::showTokenError);
 }
 
@@ -192,7 +199,15 @@ void LoginFragment::openMainWindow() {
 
 void LoginFragment::sendAuthRequest() {
     webConnector->setLoginAndPassword(this->loginEdit->text(), this->passwordEdit->text());
+    saveToSettings();
     webConnector->makeAuth();
+}
+
+void LoginFragment::saveToSettings() {
+    QSettings *settings = new QSettings();
+    settings->setValue("LOGIN", this->loginEdit->text());
+    settings->setValue("PASSWORD", this->passwordEdit->text());
+    delete settings;
 }
 
 /**

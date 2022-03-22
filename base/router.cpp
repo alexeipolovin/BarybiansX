@@ -2,6 +2,8 @@
 
 #include <QLinkedList>
 
+#include <base/utils/webconnector.h>
+
 Router::Router(
         SlidingStackedWidget *container,
         BaseFragmentFactory *screensFactory
@@ -100,6 +102,12 @@ void Router::backWhithData(BaseModel* model) {
 void Router::navigateWhithData(QString tag, BaseModel* model) {
     navigateTo(tag);
     stack.last()->bindData(model);
+}
+
+void Router::navigateWithDataAndConnector(QString tag, BaseModel *model, WebConnector *webConnector) {
+    navigateTo(tag);
+    stack.last()->bindData(model);
+    stack.last()->bindWebConnector(webConnector);
 }
 
 

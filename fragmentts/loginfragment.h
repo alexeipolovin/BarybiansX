@@ -45,6 +45,7 @@ public:
     bool tokenStatus;
 
     bool ifExist{};
+    void saveToSettings();
 public slots:
     void sendAuthRequest();
     void openMainWindow();

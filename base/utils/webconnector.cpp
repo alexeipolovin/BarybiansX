@@ -33,7 +33,7 @@ WebConnector::WebConnector(bool showDebug) {
     this->showDebug = showDebug;
     feed = new QVector<Post *>;
     userList = new QVector<User *>;
-    settings = new QSettings("login.ini", QSettings::IniFormat);
+    settings = new QSettings();
 
     this->token = "";
 
@@ -51,8 +51,8 @@ WebConnector::WebConnector(bool showDebug) {
  * Проверка наличия сохранённого логина и пароля в настройках
  * */
 bool WebConnector::checkAuth() {
-    QString login = settings->value("login").toString();
-    QString password = settings->value("password").toString();
+    QString login = settings->value("LOGIN").toString();
+    QString password = settings->value("PASSWORD").toString();
 
     if (login != "" && password != "") {
         LOGIN = login;
@@ -243,7 +243,7 @@ void WebConnector::cachePhoto(QNetworkReply *reply_photo, const QNetworkRequest 
  *
  * Метод для разбора ответа сервера, вызывается когда пришёл ответ на запрос
 */
-QJsonObject§
+QJsonObject
 WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, const QNetworkRequest &request) {
     //TODO: Вынести это в отдельный класс
     QJsonObject root;

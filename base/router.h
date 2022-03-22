@@ -10,7 +10,7 @@
 #include <QLinkedList>
 
 #include <cwidgets/slidingstackedwidget.h>
-
+#include <base/utils/webconnector.h>
 
 
 /**
@@ -67,6 +67,7 @@ public:
     ~Router();
     BaseFragment* getStartScreen();
 
+    void navigateWithDataAndConnector(QString tag, BaseModel *model, WebConnector *webConnector);
 public slots:
     /**
      * @brief navigateTo

@@ -18,7 +18,7 @@ void WebConnectorX::sendAuth(QString login, QString password) {
 }
 
 
-RequestX *WebConnectorX::createRequest(WebConnectorX::REQUEST_TYPE type) {
+RequestX *WebConnectorX::createRequest(REQUEST_TYPE type) {
 
 }
 

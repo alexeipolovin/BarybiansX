@@ -1,10 +1,12 @@
 #include "basefragment.h"
 #include <QVBoxLayout>
+#include <base/utils/webconnector.h>
 
 BaseFragment::BaseFragment() {}
 BaseFragment::~BaseFragment() {}
 void BaseFragment::onPause() {}
 void BaseFragment::onResume() {}
+void BaseFragment::bindWebConnector(WebConnector* webConnector) {}
 void BaseFragment::bindData(BaseModel* model) {}
 
 void BaseFragment::clearList(QLayout *list) {

@@ -38,7 +38,7 @@ private:
      *
      * @return фрагмент приконекченный к слотам навигатора.
      */
-    BaseFragment* createAndConnect(QString tag);
+    BaseFragment* createAndConnect(SCREEN tag);
 
     /**
      * @brief connectFragment
@@ -67,7 +67,7 @@ public:
     ~Router();
     BaseFragment* getStartScreen();
 
-    void navigateWithDataAndConnector(QString tag, BaseModel *model, WebConnector *webConnector);
+    void navigateWithDataAndConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector);
 public slots:
     /**
      * @brief navigateTo
@@ -75,7 +75,7 @@ public slots:
      *
      * Переход к следующему экрану.
      */
-    void navigateTo(QString tag);
+    void navigateTo(SCREEN tag);
 
     /**
      * @brief back
@@ -92,7 +92,7 @@ public slots:
      * Замена текущего экрана с сохранением
      * предыдущей цепочки.
      */
-    void replace(QString tag);
+    void replace(SCREEN tag);
 
     /**
      * @brief newRootScreen
@@ -102,7 +102,7 @@ public slots:
      * Замена текущего экрана на новый и сброс
      * всей цепочки экранов.
      */
-    void newRootScreen(QString tag);
+    void newRootScreen(SCREEN tag);
 
     /**
      * @brief backWhithData
@@ -118,7 +118,7 @@ public slots:
      *
      * Тот же navigateTo но с данными.
      */
-    void navigateWhithData(QString tag, BaseModel* model);
+    void navigateWhithData(SCREEN tag, BaseModel* model);
 
 
     /**
@@ -148,7 +148,7 @@ public slots:
      *
      * Тот же replace но с данными.
      */
-    void replaceWhithData(QString tag, BaseModel* model);
+    void replaceWhithData(SCREEN tag, BaseModel* model);
 };
 
 #endif // ROUTER_H

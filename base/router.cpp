@@ -24,7 +24,7 @@ Router::Router(
 Router::~Router() {
 }
 
-void Router::navigateTo(QString tag) {
+void Router::navigateTo(SCREEN tag) {
     qDebug("Navigator navigateTo");
     BaseFragment *newFragment = this->screensFactory->create(tag);
     stack.last()->onPause();
@@ -50,7 +50,7 @@ void Router::removeOnFinishLast() {
     stack.last()->onResume();
 }
 
-void Router::replace(QString tag) {
+void Router::replace(SCREEN tag) {
     qDebug("Navigator replace");
     BaseFragment *newFragment = this->screensFactory->create(tag);
     connect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnReplace);
@@ -70,7 +70,7 @@ void Router::removeOnReplace() {
     stack.append(last);
 }
 
-void Router::newRootScreen(QString tag) {
+void Router::newRootScreen(SCREEN tag) {
     qDebug("Navigator newRootScreen");
     BaseFragment *newFragment = this->screensFactory->create(tag);
     connect(currentContainer, &SlidingStackedWidget::animationFinished, this, &Router::removeOnRoot);
@@ -99,19 +99,19 @@ void Router::backWhithData(BaseModel* model) {
     back();
 }
 
-void Router::navigateWhithData(QString tag, BaseModel* model) {
+void Router::navigateWhithData(SCREEN tag, BaseModel* model) {
     navigateTo(tag);
     stack.last()->bindData(model);
 }
 
-void Router::navigateWithDataAndConnector(QString tag, BaseModel *model, WebConnector *webConnector) {
+void Router::navigateWithDataAndConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector) {
     navigateTo(tag);
     stack.last()->bindData(model);
     stack.last()->bindWebConnector(webConnector);
 }
 
 
-void Router::replaceWhithData(QString tag, BaseModel* model) {
+void Router::replaceWhithData(SCREEN tag, BaseModel* model) {
     replace(tag);
     stack.last()->bindData(model);
 }
@@ -142,7 +142,7 @@ void Router::disconnectFragment(BaseFragment *fragment) {
     disconnect(fragment, &BaseFragment::replaceWhithData, this, &Router::replaceWhithData);
 }
 
-BaseFragment* Router::createAndConnect(QString tag) {
+BaseFragment* Router::createAndConnect(SCREEN tag) {
     BaseFragment *fragment = this->screensFactory->create(tag);
     qDebug("Navigator create screen");
     connectFragment(fragment);

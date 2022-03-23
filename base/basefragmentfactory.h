@@ -4,6 +4,7 @@
 #include "basefragment.h"
 
 #include <QString>
+#include <base/data/constants.h>
 
 
 /**
@@ -26,7 +27,7 @@ public:
      *
      * @return BaseFragmnt.
      */
-    virtual BaseFragment* create(QString tag);
+    virtual BaseFragment* create(SCREEN tag);
 
     /**
      * @brief createStart
@@ -36,7 +37,7 @@ public:
      *
      * @return стартовое окно приложения.
      */
-    virtual QString createStart();
+    virtual SCREEN createStart();
 
     //MainWindow *window;
 };

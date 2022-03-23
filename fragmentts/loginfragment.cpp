@@ -18,7 +18,7 @@
 
 
 
-using namespace screens;
+
 
 const QString FONT_SIZE = "font-size: 15px;";
 const int STANDART_ANIMATION_DURATION = 1500;

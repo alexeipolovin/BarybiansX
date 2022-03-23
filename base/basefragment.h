@@ -6,7 +6,7 @@
 #include <QFrame>
 #include <QVBoxLayout>
 #include <QWidget>
-
+#include <base/data/constants.h>
 #include <base/utils/webconnector.h>
 
 /**
@@ -21,12 +21,12 @@ signals:
     void back();
     void backWhithData(BaseModel* model);
 
-    void navigateTo(QString tag);
-    void navigateWhithData(QString tag, BaseModel* model);
+    void navigateTo(SCREEN tag);
+    void navigateWhithData(SCREEN tag, BaseModel* model);
 
-    void newRootScreen(QString tag);
-    void replace(QString tag);
-    void replaceWhithData(QString tag, BaseModel* model);
+    void newRootScreen(SCREEN tag);
+    void replace(SCREEN tag);
+    void replaceWhithData(SCREEN tag, BaseModel* model);
 
 protected:
     void clearList(QLayout *list);

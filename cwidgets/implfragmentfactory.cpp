@@ -9,24 +9,24 @@
 
 
 
-using namespace screens;
-
 ImplFragmentFactory::ImplFragmentFactory(){}
 ImplFragmentFactory::~ImplFragmentFactory(){}
 
-BaseFragment* ImplFragmentFactory::create(QString tag) {
+BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
     qDebug("ScreensFactory create");
-    if (tag == SPLASH_TAG) {
+    switch (tag) {
+    case SPLASH:
         return new SplashFragment;
-    } else if (tag == LOGIN) {
+        break;
+    case LOGIN:
         return new LoginFragment;
-    } else if(tag == USER_PAGE){
+        break;
+    case USER_PAGE:
         return new UserPageFragment;
-    } else {
-        return nullptr;
+        break;
     }
 }
 
-QString ImplFragmentFactory::createStart() {
-    return SPLASH_TAG;
+SCREEN ImplFragmentFactory::createStart() {
+    return SPLASH;
 }

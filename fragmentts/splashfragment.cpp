@@ -4,8 +4,7 @@
 #include <QLabel>
 #include <QSvgWidget>
 #include <QTimer>
-using namespace screens;
-
+#include <base/data/constants.h>
 
 
 

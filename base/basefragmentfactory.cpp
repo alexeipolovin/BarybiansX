@@ -9,6 +9,6 @@ BaseFragmentFactory::~BaseFragmentFactory() {
 
 }
 
-BaseFragment* BaseFragmentFactory::create(QString tag) {return nullptr;}
+BaseFragment* BaseFragmentFactory::create(SCREEN tag) {return nullptr;}
 
-QString BaseFragmentFactory::createStart() {return nullptr;}
+SCREEN BaseFragmentFactory::createStart() {return SPLASH;}

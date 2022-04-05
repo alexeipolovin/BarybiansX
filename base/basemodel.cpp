@@ -1,4 +1,3 @@
 #include "basemodel.h"
 
-BaseModel::BaseModel() {}
-void BaseModel::pol() {}
+BaseModel::BaseModel() = default;

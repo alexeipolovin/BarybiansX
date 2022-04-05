@@ -45,7 +45,7 @@ public:
     bool tokenStatus;
 
     bool ifExist{};
-    void saveToSettings();
+    void saveToSettings() const;
 //    void resize(QResizeEvent *event) override;
 public slots:
     void sendAuthRequest();

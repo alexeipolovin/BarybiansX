@@ -17,7 +17,7 @@ public:
     void downloadFeed();
     void bindWebConnector(WebConnector *webConnector) override;
 private:
-    WebConnector *webConnector;
+    WebConnector *webConnector{};
 
     QVBoxLayout *headerLayout;
     QScrollArea *scrollArea;
@@ -36,7 +36,7 @@ private:
     QLabel *picture;
     QLabel *lastVisit;
 
-    int id;
+    int id{};
 };
 
 #endif // USERPAGEFRAGMENT_H

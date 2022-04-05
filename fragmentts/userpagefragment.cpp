@@ -5,17 +5,12 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QSettings>
-#include <QSvgWidget>
 #include <QVBoxLayout>
 #include <QNetworkAccessManager>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QMessageBox>
-#include <QJsonArray>
-#include <QScrollArea>
+
 #include <QScrollBar>
-#include <QNetworkReply>
-#include <QColor>
 
 #include <QFile>
 #include <QPixmap>
@@ -87,9 +82,9 @@ UserPageFragment::UserPageFragment()
 
     profilelay->addLayout(namelay);
 
-    QVBoxLayout *buttonLay = new QVBoxLayout();
-    QPushButton *sendMessageButton = new QPushButton();
-    connect(sendMessageButton, &QPushButton::clicked, this, [this]() {
+    auto *buttonLay = new QVBoxLayout();
+    auto *sendMessageButton = new QPushButton();
+    connect(sendMessageButton, &QPushButton::clicked, this, []() {
     });
     buttonLay->addLayout(profilelay);
     buttonLay->addWidget(sendMessageButton);
@@ -101,7 +96,7 @@ UserPageFragment::UserPageFragment()
     menuContainer->setSpacing(16);
 
     // карточка заголовка
-    CardWidget *menuHeaderCard = new CardWidget(this);
+    auto *menuHeaderCard = new CardWidget(this);
     menuHeaderCard->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Maximum);
     menuHeaderCard->setMaximumWidth(952);
     menuHeaderCard->setMinimumWidth(952);
@@ -122,7 +117,7 @@ UserPageFragment::UserPageFragment()
 }
 
 void UserPageFragment::downloadFeed() {
-    QSettings *settings = new QSettings();
+    auto *settings = new QSettings();
     webConnector = new WebConnector();
     webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
     connect(webConnector, &WebConnector::valueChanged, this, [this]() {
@@ -135,11 +130,11 @@ void UserPageFragment::downloadFeed() {
            qDebug() << i->userId;
            if(i->userId == webConnector->mainUser->id) {
                qDebug() << "KEKEKEKEKE";
-            CardWidget *widget = new CardWidget(this);
-            QVBoxLayout *layout = new QVBoxLayout(this);
-            QLabel *title = new QLabel("<b>" + i->title + "</b>");
+            auto *widget = new CardWidget(this);
+            auto *layout = new QVBoxLayout(this);
+            auto *title = new QLabel("<b>" + i->title + "</b>");
             title->setWordWrap(true);
-            QLabel *text = new QLabel(i->text);
+            auto *text = new QLabel(i->text);
             text->setTextFormat(Qt::RichText);
             text->setWordWrap(true);
             layout->addWidget(title);
@@ -155,8 +150,8 @@ void UserPageFragment::downloadFeed() {
 }
 
 
-void UserPageFragment::bindWebConnector(WebConnector *webConnector) {
-    this->webConnector = webConnector;
+void UserPageFragment::bindWebConnector(WebConnector *webConnectorCopy) {
+    this->webConnector = webConnectorCopy;
     this->webConnector->getAllUsers();
 
 

@@ -1,7 +1,7 @@
 #include "requestx.h"
 
 
-RequestX::RequestX(QString url, REQUEST_TYPE type)
+RequestX::RequestX(const QString& url, REQUEST_TYPE type)
 {
     this->url = url;
     this->setUrl(this->url);

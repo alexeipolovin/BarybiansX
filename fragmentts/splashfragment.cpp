@@ -1,6 +1,5 @@
 #include "splashfragment.h"
 
-#include <QDebug>
 #include <QLabel>
 #include <QSvgWidget>
 #include <QTimer>
@@ -11,11 +10,11 @@
 
 
 SplashFragment::SplashFragment() {
-    QVBoxLayout *mainVLayout = new QVBoxLayout;
-    QHBoxLayout *mainHLayout = new QHBoxLayout;
+    auto *mainVLayout = new QVBoxLayout;
+    auto *mainHLayout = new QHBoxLayout;
     this->setStyleSheet("QFrame {background-color:#1e2327;}");
 //    QSvgWidget *centerConainer = new QSvgWidget(":/drawable/splash.svg");
-    QLabel *centerConainer = new QLabel();
+    auto *centerConainer = new QLabel();
     QPixmap pixmap(":/drawable/flex.png");
     centerConainer->setPixmap(pixmap);
 
@@ -33,9 +32,7 @@ SplashFragment::SplashFragment() {
     QTimer::singleShot(1000, this, SLOT(openStartScreen()));
 }
 
-SplashFragment::~SplashFragment() {
-
-}
+SplashFragment::~SplashFragment() = default;
 
 void SplashFragment::openStartScreen() {
     qDebug("open main menu");

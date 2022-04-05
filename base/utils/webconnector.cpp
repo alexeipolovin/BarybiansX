@@ -9,7 +9,6 @@
 #include <QNetworkAccessManager>
 #include <QFile>
 #include <QException>
-#include <QPixmap>
 #include <QThread>
 #include <QSettings>
 #include <utility>
@@ -91,14 +90,14 @@ inline void WebConnector::standartHeader(QNetworkRequest &request) {
     request.setRawHeader(AUTHORIZATION, this->bearerToken);
 }
 
-void WebConnector::writePost(QString title, QString text) {
+void WebConnector::writePost(const QString& title, const QString& text) {
     QNetworkRequest request = this->createRequest("https://barybians.ru/api/posts&title=" + title + "&text=" + text, WRITE_POST);
     sendPostRequest(request, WRITE_POST);
 }
 
-void WebConnector::sendPostRequest(QNetworkRequest request, WebConnector::REQUEST_TYPE type) {
+void WebConnector::sendPostRequest(const QNetworkRequest& request, WebConnector::REQUEST_TYPE type) {
     QByteArray array;
-    QNetworkReply *reply;
+    QNetworkReply *reply = nullptr;
     switch (type) {
     case WebConnector::AUTH:
         break;
@@ -120,6 +119,8 @@ void WebConnector::sendPostRequest(QNetworkRequest request, WebConnector::REQUES
         break;
     case WRITE_POST:
             reply = manager->post(request, array);
+            break;
+        case SPECIFIC_FEED:
             break;
     }
 
@@ -294,7 +295,7 @@ WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, 
             QByteArray array = reply.readAll();
             QJsonDocument document = QJsonDocument::fromJson(array);
             QJsonArray jsonArray = document.object().find("messages")->toArray();
-            QVector<Message *> *temp_vector = new QVector<Message *>;
+            auto *temp_vector = new QVector<Message *>;
             qDebug() << document;
             int id = 0;
             for (const auto &i: qAsConst(jsonArray)) {

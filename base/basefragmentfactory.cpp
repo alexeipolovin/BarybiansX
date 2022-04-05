@@ -1,13 +1,9 @@
 #include "basefragment.h"
 #include "basefragmentfactory.h"
 
-BaseFragmentFactory::BaseFragmentFactory() {
+BaseFragmentFactory::BaseFragmentFactory() = default;
 
-}
-
-BaseFragmentFactory::~BaseFragmentFactory() {
-
-}
+BaseFragmentFactory::~BaseFragmentFactory() = default;
 
 BaseFragment* BaseFragmentFactory::create(SCREEN tag) {return nullptr;}
 

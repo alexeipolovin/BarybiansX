@@ -19,8 +19,7 @@ Router::Router(
     currentContainer->setCurrentIndex(0);
 }
 
-Router::~Router() {
-}
+Router::~Router() = default;
 
 void Router::navigateTo(SCREEN tag) {
     qDebug("Navigator navigateTo");
@@ -102,12 +101,6 @@ void Router::navigateWhithData(SCREEN tag, BaseModel* model) {
     stack.last()->bindData(model);
 }
 
-void Router::navigateWithDataAndConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector) {
-    navigateTo(tag);
-    stack.last()->bindData(model);
-    stack.last()->bindWebConnector(webConnector);
-}
-
 
 void Router::replaceWhithData(SCREEN tag, BaseModel* model) {
     replace(tag);
@@ -124,7 +117,7 @@ BaseFragment* Router::getStartScreen() {
     return createAndConnect(this->screensFactory->createStart());
 }
 
-void Router::connectFragment(BaseFragment *fragment) {
+void Router::connectFragment(BaseFragment *fragment) const {
     qDebug("Navigator connect slots");
     connect(fragment, &BaseFragment::back, this, &Router::back);
     connect(fragment, &BaseFragment::replace, this, &Router::replace);
@@ -136,7 +129,7 @@ void Router::connectFragment(BaseFragment *fragment) {
     connect(fragment, &BaseFragment::replaceWithDataAndWebConnector, this, &Router::replaceWithDataAndWebConnector);
 }
 
-void Router::disconnectFragment(BaseFragment *fragment) {
+void Router::disconnectFragment(BaseFragment *fragment) const {
     qDebug("Navigator disconnect slots");
     disconnect(fragment, &BaseFragment::back, this, &Router::back);
     disconnect(fragment, &BaseFragment::replace, this, &Router::replace);

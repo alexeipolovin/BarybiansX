@@ -8,7 +8,7 @@
 class RequestX : public QNetworkRequest
 {
 public:
-    RequestX(QString url, REQUEST_TYPE type);
+    RequestX(const QString& url, REQUEST_TYPE type);
 
     const QByteArray &getData() const;
     void setData(const QByteArray &newData);

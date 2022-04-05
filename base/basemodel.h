@@ -17,7 +17,6 @@ class BaseModel {
 
 public:
     BaseModel();
-    virtual void pol();
 };
 
 #endif // BASEMODEL_H

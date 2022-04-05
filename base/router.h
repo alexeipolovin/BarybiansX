@@ -49,7 +49,7 @@ private:
      * и удобного перехода между экранами.
      *
      */
-    void connectFragment(BaseFragment *fragment);
+    void connectFragment(BaseFragment *fragment) const;
 
     /**
      * @brief disconnectFragment
@@ -57,7 +57,7 @@ private:
      *
      * Отключение сигналов от фрагмента.
      */
-    void disconnectFragment(BaseFragment *fragment);
+    void disconnectFragment(BaseFragment *fragment) const;
 public:
     Router(
             SlidingStackedWidget *container,
@@ -66,7 +66,6 @@ public:
     ~Router();
     BaseFragment* getStartScreen();
 
-    void navigateWithDataAndConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector);
 public slots:
     /**
      * @brief navigateTo

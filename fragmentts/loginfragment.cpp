@@ -12,17 +12,7 @@
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include "base/basefragment.h"
-#include "cwidgets/implfragmentfactory.h"
 #include <QCoreApplication>
-#include <QDateTime>
-
-#define STANDART_START_ANIMATION_VALUE 0
-#define STANDART_ANIMATION_DURATION 1
-#define STANDART_END_ANIMATION_VALUE 2
-
-
-const QString FONT_SIZE = "font-size: 15px;";
-const QString DB_NAME = "sqlite.db";
 
 /**
   * @brief LoginFragment::LoginFragment
@@ -79,11 +69,6 @@ LoginFragment::LoginFragment() {
     QLinearGradient buttonGradient(0,0,0,loginButton->height());
     buttonGradient.setColorAt(0, QColor("#FF512F"));
     buttonGradient.setColorAt(1, QColor("#DD2476"));
-
-    QPalette buttonPalette;
-
-//    buttonPalette.setBrush(QPalette::Background, buttonGradient);
-//    loginButton->setPalette(buttonPalette);
 
     QString centerQSS = "QFrame "
                         "{"
@@ -171,7 +156,7 @@ LoginFragment::LoginFragment() {
     mainLayout->setAlignment(Qt::AlignCenter);
 
     this->setLayout(mainLayout);
-    QSettings *settings = new QSettings();
+    settings = new QSettings();
     if(settings->value("LOGIN").toString() != "" && settings->value("PASSWORD").toString() != "") {
         webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
         webConnector->checkAuth();
@@ -202,8 +187,7 @@ void LoginFragment::sendAuthRequest() {
     webConnector->makeAuth();
 }
 
-void LoginFragment::saveToSettings() {
-    QSettings *settings = new QSettings();
+void LoginFragment::saveToSettings() const {
     settings->setValue("LOGIN", this->loginEdit->text());
     settings->setValue("PASSWORD", this->passwordEdit->text());
     delete settings;

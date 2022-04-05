@@ -11,7 +11,7 @@ class SplashFragment: public BaseFragment {
 
 public:
     SplashFragment();
-    ~SplashFragment();
+    ~SplashFragment() override;
 public slots:
 
     /**

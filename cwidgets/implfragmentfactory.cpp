@@ -9,22 +9,22 @@
 
 
 
-ImplFragmentFactory::ImplFragmentFactory(){}
-ImplFragmentFactory::~ImplFragmentFactory(){}
+ImplFragmentFactory::ImplFragmentFactory() = default;
+ImplFragmentFactory::~ImplFragmentFactory() = default;
 
 BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
     qDebug("ScreensFactory create");
     switch (tag) {
     case SPLASH:
         return new SplashFragment;
-        break;
     case LOGIN:
         return new LoginFragment;
-        break;
     case USER_PAGE:
         return new UserPageFragment;
+    case DIALOG_WITH:
         break;
     }
+    return nullptr;
 }
 
 SCREEN ImplFragmentFactory::createStart() {

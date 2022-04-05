@@ -69,8 +69,8 @@ public:
 
     QNetworkRequest createPostRequest(const QString &url, WebConnector::REQUEST_TYPE type, QByteArray data);
 
-    void writePost(QString title, QString text);
-    void sendPostRequest(QNetworkRequest request, WebConnector::REQUEST_TYPE type);
+    void writePost(const QString& title, const QString& text);
+    void sendPostRequest(const QNetworkRequest& request, WebConnector::REQUEST_TYPE type);
     User *getMainUser();
     QVector<Post *> getSpecificFeed(int userId);
     void getUserWithId(int id);

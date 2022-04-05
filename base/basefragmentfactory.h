@@ -4,7 +4,7 @@
 #include "basefragment.h"
 
 #include <QString>
-#include <base/data/constants.h>
+#include "data/constants.h"
 
 
 /**

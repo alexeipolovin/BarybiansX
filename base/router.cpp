@@ -1,7 +1,5 @@
 #include "router.h"
 
-#include <QLinkedList>
-
 #include <base/utils/webconnector.h>
 
 Router::Router(

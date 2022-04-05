@@ -1,8 +1,7 @@
 #include "mainwindow.h"
 
-#include <QDesktopWidget>
-#include <cwidgets/implfragmentfactory.h>
-#include <cwidgets/slidingstackedwidget.h>
+#include "cwidgets/implfragmentfactory.h"
+#include "cwidgets/slidingstackedwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
@@ -24,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         this->setWindowTitle("BarybiansX");
         this->setWindowIcon(QIcon(":/drawable/flex.png"));
-        this->resize(QDesktopWidget().availableGeometry(this).size() * 0.86);
+//        this->resize(QDesktopWidget().availableGeometry(this).size() * 0.86);
         this->setCentralWidget(container);
     } catch (std::exception& e) {
         qDebug("%s", e.what());

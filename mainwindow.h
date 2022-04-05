@@ -1,14 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "basefragmentfactory.h"
+#include "base/basefragmentfactory.h"
 
 #include <QMainWindow>
 #include <QStackedWidget>
 
-#include <cwidgets/slidingstackedwidget.h>
+#include "cwidgets/slidingstackedwidget.h"
 
-#include <base/router.h>
+#include "base/router.h"
 
 
 

@@ -11,7 +11,7 @@
 #include <qfont.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
-
+#include "base/basefragment.h"
 #include "cwidgets/implfragmentfactory.h"
 #include <QCoreApplication>
 #include <QDateTime>
@@ -183,57 +183,7 @@ LoginFragment::LoginFragment() {
     connect(webConnector, &WebConnector::valueChanged, this, &LoginFragment::openMainWindow);
     connect(loginButton, &QPushButton::clicked, this,  &LoginFragment::sendAuthRequest);
     connect(webConnector, &WebConnector::tokenError, this, &LoginFragment::showTokenError);
-    auto *eEffect = new QGraphicsColorizeEffect(loginButton);
 
-    auto *loginFadeEffect = new QGraphicsOpacityEffect(loginEdit);
-    auto *passwordFadeEffect = new QGraphicsOpacityEffect(passwordEdit);
-    auto *loginLabelFadeEffect = new QGraphicsOpacityEffect(loginLabel);
-    auto *passwordLabelFadeEffect = new QGraphicsOpacityEffect(passwordLabel);
-
-    loginEdit->setGraphicsEffect(loginFadeEffect);
-    passwordEdit->setGraphicsEffect(passwordFadeEffect);
-    loginLabel->setGraphicsEffect(loginLabelFadeEffect);
-    passwordLabel->setGraphicsEffect(passwordLabelFadeEffect);
-
-    auto *loginAnimation = new QPropertyAnimation(loginFadeEffect, "opacity");
-    auto *passwordAnimation = new QPropertyAnimation(passwordFadeEffect, "opacity");
-    auto *loginLabelAnimation = new QPropertyAnimation(loginLabelFadeEffect, "opacity");
-    auto *passwordLabelAnimation = new QPropertyAnimation(passwordLabelFadeEffect, "opacity");
-
-    loginAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-    passwordAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-    loginLabelAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-    passwordLabelAnimation->setEasingCurve(QEasingCurve::InOutQuad);
-
-    loginAnimation->setDuration(STANDART_ANIMATION_DURATION);
-    passwordAnimation->setDuration(STANDART_ANIMATION_DURATION);
-    loginLabelAnimation->setDuration(STANDART_ANIMATION_DURATION);
-    passwordLabelAnimation->setDuration(STANDART_ANIMATION_DURATION);
-
-    loginAnimation->setStartValue(STANDART_START_ANIMATION_VALUE);
-    passwordAnimation->setStartValue(STANDART_START_ANIMATION_VALUE);
-    loginLabelAnimation->setStartValue(STANDART_START_ANIMATION_VALUE);
-    passwordLabelAnimation->setStartValue(STANDART_START_ANIMATION_VALUE);
-
-    loginAnimation->setEndValue(STANDART_END_ANIMATION_VALUE);
-    passwordAnimation->setEndValue(STANDART_END_ANIMATION_VALUE);
-    loginLabelAnimation->setEndValue(STANDART_END_ANIMATION_VALUE);
-    passwordLabelAnimation->setEndValue(STANDART_END_ANIMATION_VALUE);
-
-    passwordAnimation->start();
-    loginAnimation->start();
-    loginLabelAnimation->start();
-    passwordLabelAnimation->start();
-
-    QPalette pallete;
-
-    QLinearGradient gradient(0,0,0, 1280);
-
-    gradient.setColorAt(0, QColor("#AA076B"));
-    gradient.setColorAt(1, QColor("#61045F"));
-
-    pallete.setBrush(QPalette::Background, gradient);
-    setPalette(pallete);
 }
 
 void LoginFragment::showTokenError() {

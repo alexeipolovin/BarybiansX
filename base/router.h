@@ -7,7 +7,6 @@
 #include "basefragmentfactory.h"
 
 #include <QStackedWidget>
-#include <QLinkedList>
 
 #include <cwidgets/slidingstackedwidget.h>
 #include <base/utils/webconnector.h>

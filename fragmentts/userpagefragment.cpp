@@ -123,9 +123,10 @@ UserPageFragment::UserPageFragment()
 
 void UserPageFragment::downloadFeed() {
     QSettings *settings = new QSettings();
+    webConnector = new WebConnector();
     webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
     connect(webConnector, &WebConnector::valueChanged, this, [this]() {
-        QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru​​/v2/posts", WebConnector::GET_FEED);
+        QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru/v2/posts", WebConnector::GET_FEED);
     webConnector->sendRequest(request, WebConnector::GET_FEED);
     connect(webConnector, &WebConnector::feedOk, this, [this]() {
        QVector<Post*> *secVec = webConnector->getFeed();

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(Barybians_cmake)
+project(BarybiansX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -14,7 +14,7 @@ AUX_SOURCE_DIRECTORY(base/, BASE_SOURCES)
 AUX_SOURCE_DIRECTORY(cwidgets/, CWIDGETS_SOURCES)
 AUX_SOURCE_DIRECTORY(fragmentts/, FRAGMENTTS_SOURCES)
 AUX_SOURCE_DIRECTORY(fragments/, FRAGMENTS_SOURCES)
-add_executable(Barybians_cmake
+add_executable(BarybiansX
         ${CMAKE_SOURCE_DIR}
         main.cpp
         ${BASE_SOURCES}
@@ -55,7 +55,7 @@ find_package(Qt6Widgets REQUIRED)
 find_package(Qt6Network REQUIRED)
 find_package(Qt6WebSockets REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
-target_link_libraries(Barybians_cmake PRIVATE Qt6::SvgWidgets)
-target_link_libraries(Barybians_cmake PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
-target_link_libraries(Barybians_cmake PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(Barybians_cmake PRIVATE Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(BarybiansX PRIVATE Qt6::SvgWidgets)
+target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
+target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Network)

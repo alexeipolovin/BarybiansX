@@ -250,7 +250,6 @@ void WebConnector::cachePhoto(QNetworkReply *reply_photo, const QNetworkRequest 
 */
 QJsonObject
 WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, const QNetworkRequest &request) {
-    //TODO: Вынести это в отдельный класс
     QJsonObject root;
     switch (type) {
         case ALL_USERS: {

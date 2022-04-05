@@ -192,7 +192,7 @@ void LoginFragment::showTokenError() {
 }
 
 void LoginFragment::openMainWindow() {
-    emit replaceWhithData(USER_PAGE, this->webConnector->getMainUser());
+    emit replaceWithDataAndWebConnector(USER_PAGE, this->webConnector->getMainUser(), webConnector);
 //    emit newRootScreen(USER_PAGE);
 }
 

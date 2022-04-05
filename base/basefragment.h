@@ -26,7 +26,9 @@ signals:
 
     void newRootScreen(SCREEN tag);
     void replace(SCREEN tag);
+
     void replaceWhithData(SCREEN tag, BaseModel* model);
+    void replaceWithDataAndWebConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector);
 
 protected:
     void clearList(QLayout *list);
@@ -58,7 +60,7 @@ public:
      * @param model модель данных
      */
     virtual void bindData(BaseModel* model);
-    void bindWebConnector(WebConnector *webConnector);
+    virtual void bindWebConnector(WebConnector *webConnector);
 };
 
 #endif // BASEFRAGMENT_H

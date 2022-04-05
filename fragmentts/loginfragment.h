@@ -46,6 +46,7 @@ public:
 
     bool ifExist{};
     void saveToSettings();
+//    void resize(QResizeEvent *event) override;
 public slots:
     void sendAuthRequest();
     void openMainWindow();

@@ -73,6 +73,8 @@ public:
     void sendPostRequest(QNetworkRequest request, WebConnector::REQUEST_TYPE type);
     User *getMainUser();
     QVector<Post *> getSpecificFeed(int userId);
+    void getUserWithId(int id);
+    void getAllUsers();
 private:
     QByteArray sendingData;
 
@@ -99,6 +101,7 @@ signals:
     void valueChanged(QString &token);
     void messageListReceived();
     void tokenError();
+
 };
 
 #endif // WEBCONNECTOR_H

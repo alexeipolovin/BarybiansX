@@ -6,8 +6,9 @@
 #include <QNetworkAccessManager>
 #include <base/data/constants.h>
 
-class WebConnectorX
+class WebConnectorX : public QObject
 {
+    Q_OBJECT
 public:
     WebConnectorX(bool showDebug = false);
 
@@ -15,6 +16,10 @@ public:
 
     RequestX *createRequest(REQUEST_TYPE type);
     void sendRequest(RequestX *requester);
+    void checkSettingsLoginPass();
+    const QString &getToken() const;
+    void setToken(const QString &newToken);
+
 private:
     QNetworkAccessManager *manager;
 
@@ -24,6 +29,7 @@ private:
     QString password;
 
     QString token;
+
 };
 
 #endif // WEBCONNECTORX_H

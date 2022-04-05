@@ -6,6 +6,7 @@ RequestX::RequestX(QString url, REQUEST_TYPE type)
     this->url = url;
     this->setUrl(this->url);
     this->type = type;
+    request = new QNetworkRequest(url);
 }
 
 const QByteArray &RequestX::getData() const

@@ -116,6 +116,12 @@ void Router::replaceWhithData(SCREEN tag, BaseModel* model) {
     stack.last()->bindData(model);
 }
 
+void Router::replaceWithDataAndWebConnector(SCREEN tag, BaseModel* model, WebConnector *webConnector) {
+    replace(tag);
+    stack.last()->bindData(model);
+    stack.last()->bindWebConnector(webConnector);
+}
+
 BaseFragment* Router::getStartScreen() {
     return createAndConnect(this->screensFactory->createStart());
 }
@@ -129,6 +135,7 @@ void Router::connectFragment(BaseFragment *fragment) {
     connect(fragment, &BaseFragment::backWhithData, this, &Router::backWhithData);
     connect(fragment, &BaseFragment::navigateWhithData, this, &Router::navigateWhithData);
     connect(fragment, &BaseFragment::replaceWhithData, this, &Router::replaceWhithData);
+    connect(fragment, &BaseFragment::replaceWithDataAndWebConnector, this, &Router::replaceWithDataAndWebConnector);
 }
 
 void Router::disconnectFragment(BaseFragment *fragment) {
@@ -140,6 +147,7 @@ void Router::disconnectFragment(BaseFragment *fragment) {
     disconnect(fragment, &BaseFragment::backWhithData, this, &Router::backWhithData);
     disconnect(fragment, &BaseFragment::navigateWhithData, this, &Router::navigateWhithData);
     disconnect(fragment, &BaseFragment::replaceWhithData, this, &Router::replaceWhithData);
+    disconnect(fragment, &BaseFragment::replaceWithDataAndWebConnector, this, &Router::replaceWithDataAndWebConnector);
 }
 
 BaseFragment* Router::createAndConnect(SCREEN tag) {

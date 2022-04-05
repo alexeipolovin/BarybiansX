@@ -3,7 +3,8 @@
 enum SCREEN {
     SPLASH,
     LOGIN,
-    USER_PAGE
+    USER_PAGE,
+    DIALOG_WITH,
 };
 
 enum REQUEST_TYPE {

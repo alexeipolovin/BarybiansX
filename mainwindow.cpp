@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
         );
 
         QString mainStyle = "QWidget#window {"
-                            "background-color:white;"
+                            "background-color:black;"
                             "}";
         container->setStyleSheet(mainStyle);
 

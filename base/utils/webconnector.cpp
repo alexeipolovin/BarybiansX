@@ -82,6 +82,11 @@ void WebConnector::setLoginAndPassword(QString login, QString password) {
 }
 
 
+void WebConnector::getAllUsers() {
+    QNetworkRequest request = createRequest("https://barybians.ru​/api​/users​/", ALL_USERS);
+    sendRequest(request, ALL_USERS);
+}
+
 inline void WebConnector::standartHeader(QNetworkRequest &request) {
     request.setRawHeader(AUTHORIZATION, this->bearerToken);
 }

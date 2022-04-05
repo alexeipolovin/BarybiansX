@@ -15,7 +15,10 @@ public:
     void bindData(BaseModel *model);
 
     void downloadFeed();
+    void bindWebConnector(WebConnector *webConnector) override;
 private:
+    WebConnector *webConnector;
+
     QVBoxLayout *headerLayout;
     QScrollArea *scrollArea;
     QVBoxLayout *scrollContainerLayout;
@@ -32,6 +35,8 @@ private:
     QLabel *status;
     QLabel *picture;
     QLabel *lastVisit;
+
+    int id;
 };
 
 #endif // USERPAGEFRAGMENT_H

@@ -71,7 +71,9 @@ UserPageFragment::UserPageFragment()
                 "stop:0 #0596FF, stop:1 #8773FF);}"
     );
     profilelay = new QHBoxLayout();
+    profilelay->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     namelay = new QVBoxLayout();
+    namelay->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
 
     fullName = new QLabel();
     status = new QLabel();
@@ -85,6 +87,14 @@ UserPageFragment::UserPageFragment()
 
     profilelay->addLayout(namelay);
 
+    QVBoxLayout *buttonLay = new QVBoxLayout();
+    QPushButton *sendMessageButton = new QPushButton();
+    connect(sendMessageButton, &QPushButton::clicked, this, [this]() {
+    });
+    buttonLay->addLayout(profilelay);
+    buttonLay->addWidget(sendMessageButton);
+
+    lastVisit->setAlignment(Qt::AlignLeft);
     menuContainer = new QVBoxLayout;
     menuContainer->setAlignment(Qt::AlignHCenter);
     menuContainer->setContentsMargins(0, 16, 0, 0);
@@ -100,9 +110,7 @@ UserPageFragment::UserPageFragment()
     headerLayout->setAlignment(Qt::AlignLeft);
     headerLayout->setContentsMargins(20, 20, 20, 20);
 
-
-    profilelay->addWidget(lastVisit);
-    backGradient->setLayout(profilelay);
+    backGradient->setLayout(buttonLay);
     backContainerLaout->addWidget(backGradient);
 
 
@@ -114,14 +122,12 @@ UserPageFragment::UserPageFragment()
 }
 
 void UserPageFragment::downloadFeed() {
-    WebConnector *webConnector = new WebConnector();
     QSettings *settings = new QSettings();
     webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
-    webConnector->makeAuth();
-    connect(webConnector, &WebConnector::valueChanged, this, [this, webConnector]() {
+    connect(webConnector, &WebConnector::valueChanged, this, [this]() {
         QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru​​/v2/posts", WebConnector::GET_FEED);
     webConnector->sendRequest(request, WebConnector::GET_FEED);
-    connect(webConnector, &WebConnector::feedOk, this, [this, webConnector]() {
+    connect(webConnector, &WebConnector::feedOk, this, [this]() {
        QVector<Post*> *secVec = webConnector->getFeed();
 
        for(auto i : *secVec) {
@@ -130,22 +136,35 @@ void UserPageFragment::downloadFeed() {
                qDebug() << "KEKEKEKEKE";
             CardWidget *widget = new CardWidget(this);
             QVBoxLayout *layout = new QVBoxLayout(this);
-            layout->addWidget(new QLabel(i->title));
-            layout->addWidget(new QLabel(i->text));
+            QLabel *title = new QLabel("<b>" + i->title + "</b>");
+            title->setWordWrap(true);
+            QLabel *text = new QLabel(i->text);
+            text->setTextFormat(Qt::RichText);
+            text->setWordWrap(true);
+            layout->addWidget(title);
+            layout->addWidget(text);
             widget->setLayout(layout);
             menuContainer->addWidget(widget);
            }
        }
-       delete webConnector;
        this->setLayout(scrollContainerLayout);
     });
 });
     delete settings;
 }
+
+
+void UserPageFragment::bindWebConnector(WebConnector *webConnector) {
+    this->webConnector = webConnector;
+    this->webConnector->getAllUsers();
+
+
+}
 void UserPageFragment::bindData(BaseModel *model) {
     User *mainUser = (User *) model;
 
-    this->fullName->setText(mainUser->name + "\n" + mainUser->lastName);
+    this->fullName->setText(mainUser->name + " " + mainUser->lastName);
+    qDebug() << "main_user_name:" << mainUser->name;
     this->fullName->setStyleSheet("background:none");
 //    this->picture->setPixmap(QPixmap(mainUser->photoName));
     QFile fileName(":/drawable/main_user_photo.png");

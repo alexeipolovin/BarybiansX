@@ -22,6 +22,8 @@ public:
     REQUEST_TYPE getType() const;
     void setType(REQUEST_TYPE newType);
 
+    QNetworkRequest *request;
+
 private:
     QString url;
     QByteArray data = nullptr;

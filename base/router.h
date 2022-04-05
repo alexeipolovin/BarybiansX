@@ -149,6 +149,7 @@ public slots:
      * Тот же replace но с данными.
      */
     void replaceWhithData(SCREEN tag, BaseModel* model);
+    void replaceWithDataAndWebConnector(SCREEN tag, BaseModel *model, WebConnector *webConnector);
 };
 
 #endif // ROUTER_H

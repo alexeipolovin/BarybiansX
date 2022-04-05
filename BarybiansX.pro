@@ -15,6 +15,7 @@ SOURCES += \
     base/router.cpp \
     base/utils/requestx.cpp \
     base/utils/webconnectorx.cpp \
+    base/utils/webservice.cpp \
     cwidgets/addition/cardwidget.cpp \
     cwidgets/addition/menuheaderwidget.cpp \
     cwidgets/cardview.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     base/router.h \
     base/utils/requestx.h \
     base/utils/webconnectorx.h \
+    base/utils/webservice.h \
     cwidgets/addition/cardwidget.h \
     cwidgets/addition/menuheaderwidget.h \
     cwidgets/cardview.h \

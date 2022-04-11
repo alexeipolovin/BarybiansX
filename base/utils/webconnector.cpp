@@ -91,7 +91,7 @@ inline void WebConnector::standartHeader(QNetworkRequest &request) {
 }
 
 void WebConnector::writePost(const QString& title, const QString& text) {
-    QNetworkRequest request = this->createRequest("https://barybians.ru/api/posts&title=" + title + "&text=" + text, WRITE_POST);
+        QNetworkRequest request = this->createRequest("https://api.barybians.ru/v2/posts&title=" + title + "&text=" + text, WRITE_POST);
     sendPostRequest(request, WRITE_POST);
 }
 
@@ -172,7 +172,12 @@ QNetworkRequest WebConnector::createRequest(const QString &url, WebConnector::RE
             break;
         }
         case WRITE_POST: {
-            standartHeader(request);
+            request.setRawHeader(AUTHORIZATION, this->bearerToken);
+            qDebug() << "uuid:" << QUuid::createUuid();
+            QByteArray uuid= QUuid::createUuid().toByteArray();
+            uuid.replace("{", "");
+            uuid.replace("}", "");
+            request.setRawHeader("request", uuid);
             break;
         }
         case GET_DIALOGS: {
@@ -290,7 +295,6 @@ WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, 
         }
 
 
-            //TODO: придумать как реализовать сортировку кто отправил кто получил для выравнивания в окне диалога
         case DIALOG_WITH: {
             QByteArray array = reply.readAll();
             QJsonDocument document = QJsonDocument::fromJson(array);

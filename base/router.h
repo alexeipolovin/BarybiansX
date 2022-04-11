@@ -61,10 +61,12 @@ private:
 public:
     Router(
             SlidingStackedWidget *container,
-            BaseFragmentFactory *screensFactory
+            BaseFragmentFactory *screensFactory,
+            bool isEditor = false
     );
     ~Router();
     BaseFragment* getStartScreen();
+    BaseFragment* getStartEditor();
 
 public slots:
     /**

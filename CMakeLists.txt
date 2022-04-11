@@ -13,7 +13,7 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets Network REQUIRED)
 AUX_SOURCE_DIRECTORY(base/, BASE_SOURCES)
 AUX_SOURCE_DIRECTORY(cwidgets/, CWIDGETS_SOURCES)
 AUX_SOURCE_DIRECTORY(fragmentts/, FRAGMENTTS_SOURCES)
-AUX_SOURCE_DIRECTORY(fragments/, FRAGMENTS_SOURCES)
+AUX_SOURCE_DIRECTORY(fragmentts/, FRAGMENTS_SOURCES)
 add_executable(BarybiansX
         ${CMAKE_SOURCE_DIR}
         main.cpp
@@ -49,7 +49,7 @@ add_executable(BarybiansX
         base/basemodel.cpp
         base/data/data.cpp
         res.qrc
-        )
+        fragmentts/dialogfragment.cpp fragmentts/dialogfragment.h cwidgets/addition/EditorWindow.cpp cwidgets/addition/EditorWindow.h fragmentts/editorsplashfragment.cpp fragmentts/editorsplashfragment.h meditorsplash.cpp meditorsplash.h)
 find_package(Qt6Core REQUIRED)
 find_package(Qt6Widgets REQUIRED)
 find_package(Qt6Network REQUIRED)

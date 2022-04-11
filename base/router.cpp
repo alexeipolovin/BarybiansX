@@ -4,13 +4,18 @@
 
 Router::Router(
         SlidingStackedWidget *container,
-        BaseFragmentFactory *screensFactory
+        BaseFragmentFactory *screensFactory,
+        bool isEditor
 ) {
     qDebug("create navigator");
     this->screensFactory = screensFactory;
     this->currentContainer = container;
     qDebug("create start fragment");
-    BaseFragment* startFragment = getStartScreen();
+    BaseFragment* startFragment;
+    if(!isEditor)
+        startFragment = getStartScreen();
+    else
+        startFragment = getStartEditor();
     qDebug("append start fragment");
     this->stack.append(startFragment);
 
@@ -146,4 +151,8 @@ BaseFragment* Router::createAndConnect(SCREEN tag) {
     qDebug("Navigator create screen");
     connectFragment(fragment);
     return fragment;
+}
+
+BaseFragment* Router::getStartEditor() {
+    return createAndConnect(this->screensFactory->createEditorStart());
 }

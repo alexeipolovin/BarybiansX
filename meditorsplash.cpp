@@ -1,11 +1,12 @@
-#include "mainwindow.h"
-#include <QScreen>
-#include <QGuiApplication>
-#include "cwidgets/implfragmentfactory.h"
-#include "cwidgets/slidingstackedwidget.h"
+//
+// Created by Алексей Половин on 11.04.2022.
+//
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) {
+#include <QGuiApplication>
+#include "meditorsplash.h"
+#include "cwidgets/implfragmentfactory.h"
+#include <QScreen>
+MEditorSplash::MEditorSplash() : QMainWindow(){
     try {
         qDebug("create main window");
         container = new SlidingStackedWidget(this);
@@ -13,8 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
 
         this->factory = new ImplFragmentFactory;
         this->navigator = new Router(
-                    this->container,
-                    this->factory
+                this->container,
+                this->factory,
+                true
         );
 
         QString mainStyle = "QWidget#window {"
@@ -31,10 +33,3 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug("%s", e.what());
     }
 }
-
-MainWindow::~MainWindow() {
-    delete container;
-    delete navigator;
-
-}
-

@@ -8,3 +8,4 @@ BaseFragmentFactory::~BaseFragmentFactory() = default;
 BaseFragment* BaseFragmentFactory::create(SCREEN tag) {return nullptr;}
 
 SCREEN BaseFragmentFactory::createStart() {return SPLASH;}
+SCREEN BaseFragmentFactory::createEditorStart() {return EDITOR_SPLASH;}

@@ -1,10 +1,11 @@
 #include "implfragmentfactory.h"
+#include "fragmentts/editorsplashfragment.h"
+#include "cwidgets/addition/EditorWindow.h"
 
 #include <QString>
 
 #include <fragmentts/loginfragment.h>
 #include <fragmentts/splashfragment.h>
-#include <fragmentts/userfragment.h>
 #include <fragmentts/userpagefragment.h>
 
 
@@ -23,6 +24,8 @@ BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
         return new UserPageFragment;
     case DIALOG_WITH:
         break;
+    case EDITOR_SPLASH:
+        return new EditorSplashFragment;
     }
     return nullptr;
 }

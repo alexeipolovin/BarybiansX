@@ -4,7 +4,7 @@
 #include <QSvgWidget>
 #include <QTimer>
 #include <base/data/constants.h>
-
+#include <QMovie>
 
 
 
@@ -18,6 +18,9 @@ SplashFragment::SplashFragment() {
     QPixmap pixmap(":/drawable/flex.png");
     centerConainer->setPixmap(pixmap);
 
+//    QMovie *movie = new QMovie(":/drawable/resources/editorsplash.gif");
+//    centerConainer->setMovie(movie);
+//    movie->start();
 
 //    centerConainer->setStyleSheet(SPLASH_ICON);
 

@@ -1,4 +1,6 @@
 #include "userpagefragment.h"
+#include "cwidgets/addition/EditorWindow.h"
+#include "meditorsplash.h"
 #include <QWidget>
 #include <QFrame>
 #include <QScrollArea>
@@ -83,11 +85,35 @@ UserPageFragment::UserPageFragment()
     profilelay->addLayout(namelay);
 
     auto *buttonLay = new QVBoxLayout();
-    auto *sendMessageButton = new QPushButton();
+    auto *sendMessageButton = new QPushButton("Dialog");
+    auto *writePostButton = new QPushButton("Write post");
     connect(sendMessageButton, &QPushButton::clicked, this, []() {
     });
     buttonLay->addLayout(profilelay);
-    buttonLay->addWidget(sendMessageButton);
+    buttonLay->addWidget(writePostButton);
+
+    writePostButton->setStyleSheet("QPushButton{"
+                                   "background-color: #1e2327;"
+                                   "border-style: solid;"
+                                   "border-color: #1e2327;"
+                                   "font-size:14px;"
+                                   "border-width: 5px;"
+                                   "border-radius: 10px;"
+                                   "}"
+    );
+    writePostButton->setFixedWidth(120);
+    connect(writePostButton, &QPushButton::clicked, this, [this]() {
+        EditorWindow *editorWindow = new EditorWindow();
+        connect(editorWindow, &EditorWindow::postWritten, this, [editorWindow, this]() {
+            this->webConnector->writePost(editorWindow->postTitle, editorWindow->postText);
+        });
+        editorWindow->show();
+    });
+    sendMessageButton->setFixedWidth(120);
+    sendMessageButton->setStyleSheet(" QPushButton { border-radius: 20; color:white; background-color:black; }");
+    connect(sendMessageButton, &QPushButton::clicked, this, [this]() {
+       emit replaceWithDataAndWebConnector(DIALOG_WITH, this->webConnector->mainUser, webConnector);
+    });
 
     lastVisit->setAlignment(Qt::AlignLeft);
     menuContainer = new QVBoxLayout;
@@ -112,14 +138,10 @@ UserPageFragment::UserPageFragment()
     mainContainerLaout->addLayout(menuContainer);
 //    mainContainerLaout->addLayout(headerLayout);
 
-
-    downloadFeed();
 }
 
 void UserPageFragment::downloadFeed() {
-    auto *settings = new QSettings();
-    webConnector = new WebConnector();
-    webConnector->setLoginAndPassword(settings->value("LOGIN").toString(), settings->value("PASSWORD").toString());
+    webConnector->makeAuth();
     connect(webConnector, &WebConnector::valueChanged, this, [this]() {
         QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru/v2/posts", WebConnector::GET_FEED);
     webConnector->sendRequest(request, WebConnector::GET_FEED);
@@ -146,13 +168,14 @@ void UserPageFragment::downloadFeed() {
        this->setLayout(scrollContainerLayout);
     });
 });
-    delete settings;
 }
 
 
 void UserPageFragment::bindWebConnector(WebConnector *webConnectorCopy) {
     this->webConnector = webConnectorCopy;
+    qDebug() << "Totoken:" << webConnector->token;
     this->webConnector->getAllUsers();
+    downloadFeed();
 
 
 }

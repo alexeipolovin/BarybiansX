@@ -38,6 +38,7 @@ public:
      * @return стартовое окно приложения.
      */
     virtual SCREEN createStart();
+    virtual SCREEN createEditorStart();
 
     //MainWindow *window;
 };

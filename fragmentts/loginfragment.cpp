@@ -183,7 +183,7 @@ void LoginFragment::openMainWindow() {
 
 void LoginFragment::sendAuthRequest() {
     webConnector->setLoginAndPassword(this->loginEdit->text(), this->passwordEdit->text());
-    saveToSettings();
+//    saveToSettings();
     webConnector->makeAuth();
 }
 

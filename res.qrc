@@ -22,5 +22,7 @@
         <file>resources/text-64.png</file>
         <file>resources/check-file-64.png</file>
         <file>resources/text-edit-64.png</file>
+        <file>resources/preloader.webp</file>
+        <file>resources/preloader.gif</file>
     </qresource>
 </RCC>

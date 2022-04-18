@@ -12,7 +12,7 @@ class UserPageFragment:public BaseFragment
 {
 public:
     UserPageFragment();
-    void bindData(BaseModel *model);
+    void bindData(BaseModel *model) override;
 
     void downloadFeed();
     void bindWebConnector(WebConnector *webConnector) override;

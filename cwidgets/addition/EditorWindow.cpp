@@ -55,7 +55,9 @@ EditorWindow::EditorWindow(QWidget *parent) : QMainWindow(parent) {
                               "}");
     connect(sendButton, &QPushButton::clicked, this, [this]() {
         this->postTitle = this->titleEdit->text();
+        qDebug() << "title:" << postTitle;
         this->postText = this->textEdit->toPlainText();
+        qDebug() << "text:" << postText;
         emit postWritten();
     });
     mainLayout->addWidget(sendButton);

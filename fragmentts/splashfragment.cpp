@@ -15,12 +15,12 @@ SplashFragment::SplashFragment() {
     this->setStyleSheet("QFrame {background-color:#1e2327;}");
 //    QSvgWidget *centerConainer = new QSvgWidget(":/drawable/splash.svg");
     auto *centerConainer = new QLabel();
-    QPixmap pixmap(":/drawable/flex.png");
-    centerConainer->setPixmap(pixmap);
+//    QPixmap pixmap(":/drawable/flex.png");
+//    centerConainer->setPixmap(pixmap);
 
-//    QMovie *movie = new QMovie(":/drawable/resources/editorsplash.gif");
-//    centerConainer->setMovie(movie);
-//    movie->start();
+    QMovie *movie = new QMovie(":/drawable/resources/preloader.webp");
+    centerConainer->setMovie(movie);
+    movie->start();
 
 //    centerConainer->setStyleSheet(SPLASH_ICON);
 

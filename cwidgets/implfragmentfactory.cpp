@@ -1,6 +1,7 @@
 #include "implfragmentfactory.h"
 #include "fragmentts/editorsplashfragment.h"
 #include "cwidgets/addition/EditorWindow.h"
+#include "fragmentts/feedfragment.h"
 
 #include <QString>
 
@@ -26,6 +27,8 @@ BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
         break;
     case EDITOR_SPLASH:
         return new EditorSplashFragment;
+    case FEED:
+        return new FeedFragment;
     }
     return nullptr;
 }

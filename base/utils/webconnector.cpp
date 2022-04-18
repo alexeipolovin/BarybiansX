@@ -92,7 +92,16 @@ inline void WebConnector::standartHeader(QNetworkRequest &request) {
 
 void WebConnector::writePost(const QString& title, const QString& text) {
         QNetworkRequest request = this->createRequest("https://api.barybians.ru/v2/posts&title=" + title + "&text=" + text, WRITE_POST);
-    sendPostRequest(request, WRITE_POST);
+//        QNetworkRequest *request1 = new QNetworkRequest();
+//        request1->setHeader(QNetworkRequest::ContentTypeHeader, HEADER_APP_TYPE);
+        QUrl mUrl ("https://api.barybians.ru/v2/posts");
+        QUrlQuery query;
+        query.addQueryItem("title", title);
+        query.addQueryItem("text", text);
+        mUrl.setQuery(query);
+//        request1->setUrl(mUrl);
+//        request1->setRawHeader(AUTHORIZATION, this->bearerToken);
+        sendPostRequest(request, WRITE_POST);
 }
 
 void WebConnector::sendPostRequest(const QNetworkRequest& request, WebConnector::REQUEST_TYPE type) {
@@ -177,7 +186,10 @@ QNetworkRequest WebConnector::createRequest(const QString &url, WebConnector::RE
             QByteArray uuid= QUuid::createUuid().toByteArray();
             uuid.replace("{", "");
             uuid.replace("}", "");
+            qDebug() << uuid;
             request.setRawHeader("request", uuid);
+//            qDebug() << "Header is:" << request.header().toString()
+//            qDebug() << "Raw header is:" << request.rawHeaderList()["request"];
             break;
         }
         case GET_DIALOGS: {
@@ -418,7 +430,9 @@ WebConnector::parseReply(QNetworkReply &reply, WebConnector::REQUEST_TYPE type, 
             break;
         }
         case WRITE_POST: {
-            QJsonDocument document = QJsonDocument::fromJson(reply.readAll());
+            QByteArray qByteArray = reply.readAll();
+            qDebug() << qByteArray;
+            QJsonDocument document = QJsonDocument::fromJson(qByteArray);
             root = document.object();
 
             Post *post = new Post();

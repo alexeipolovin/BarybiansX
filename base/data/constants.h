@@ -25,7 +25,8 @@ enum SCREEN {
     USER_PAGE,
     DIALOG_WITH,
     EDITOR_SPLASH,
-    EDITOR_WINDOW
+    EDITOR_WINDOW,
+    FEED,
 };
 
 enum REQUEST_TYPE {

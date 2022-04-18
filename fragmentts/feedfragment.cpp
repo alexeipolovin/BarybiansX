@@ -1,30 +1,49 @@
-#include "userpagefragment.h"
-#include "cwidgets/addition/EditorWindow.h"
-#include "meditorsplash.h"
-#include <QWidget>
-#include <QFrame>
-#include <QScrollArea>
+//
+// Created by Алексей Половин on 18.04.2022.
+//
+
+#include <QtWidgets/qscrollarea.h>
+#include "feedfragment.h"
+#include "cwidgets/addition/cardwidget.h"
+#include <QScrollBar>
 #include <QLabel>
 #include <QPushButton>
-#include <QSettings>
-#include <QVBoxLayout>
-#include <QNetworkAccessManager>
-#include <QJsonDocument>
-#include <QJsonObject>
+#include <exception>
 
-#include <QScrollBar>
+void FeedFragment::bindWebConnector(WebConnector *webConnectorCopy) {
+    this->webConnector = webConnectorCopy;
+    qDebug() << "Totoken:" << webConnector->token;
+    downloadFeed();
 
-#include <QFile>
-#include <QPixmap>
-#include <QSizePolicy>
-#include <QVector>
 
-#include <base/data/data.h>
+}
 
-#include <cwidgets/addition/cardwidget.h>
+void FeedFragment::downloadFeed() {
+    QVector<Post*> *secVec = webConnector->getFeed();
+       for(auto i : *secVec) {
+           qDebug() << i->userId;
+               qDebug() << "KEKEKEKEKE";
+            auto *widget = new CardWidget(this);
+            auto *layout = new QVBoxLayout(this);
+            auto *title = new QLabel("<b>" + i->title + "</b>");
+            title->setWordWrap(true);
+            auto *text = new QLabel(i->text);
+            text->setTextFormat(Qt::RichText);
+            text->setWordWrap(true);
+            layout->addWidget(title);
+            layout->addWidget(text);
+            widget->setLayout(layout);
+            menuContainer->addWidget(widget);
+       }
+       this->setLayout(scrollContainerLayout);
 
-#include <base/utils/webconnector.h>
-UserPageFragment::UserPageFragment()
+//       delete secVec;
+}
+
+void FeedFragment::bindData(BaseModel *model) {
+
+}
+FeedFragment::FeedFragment()
 {
     // прокручивающийся контеинер
     scrollContainerLayout = new QVBoxLayout;
@@ -88,14 +107,6 @@ UserPageFragment::UserPageFragment()
     auto *sendMessageButton = new QPushButton("Dialog");
     auto *writePostButton = new QPushButton("Write post");
     auto goToFeed = new QPushButton("Feed");
-    goToFeed->setStyleSheet("QPushButton{"
-                            "background-color: #1e2327;"
-                            "border-style: solid;"
-                            "border-color: #1e2327;"
-                            "font-size:14px;"
-                            "border-width: 5px;"
-                            "border-radius: 10px;"
-                            "}");
     connect(sendMessageButton, &QPushButton::clicked, this, []() {
     });
     buttonLay->addLayout(profilelay);
@@ -114,14 +125,14 @@ UserPageFragment::UserPageFragment()
                                    "border-radius: 10px;"
                                    "}"
     );
-    writePostButton->setFixedWidth(120);
-    connect(writePostButton, &QPushButton::clicked, this, [this]() {
-        EditorWindow *editorWindow = new EditorWindow();
-        connect(editorWindow, &EditorWindow::postWritten, this, [editorWindow, this]() {
-            this->webConnector->writePost(editorWindow->postTitle, editorWindow->postText);
-        });
-        editorWindow->show();
-    });
+    goToFeed->setStyleSheet("QPushButton{"
+                            "background-color: #1e2327;"
+                            "border-style: solid;"
+                            "border-color: #1e2327;"
+                            "font-size:14px;"
+                            "border-width: 5px;"
+                            "border-radius: 10px;"
+                            "}");
     sendMessageButton->setFixedWidth(120);
     sendMessageButton->setStyleSheet(" QPushButton { border-radius: 20; color:white; background-color:black; }");
     connect(sendMessageButton, &QPushButton::clicked, this, [this]() {
@@ -152,66 +163,3 @@ UserPageFragment::UserPageFragment()
 //    mainContainerLaout->addLayout(headerLayout);
 
 }
-
-void UserPageFragment::downloadFeed() {
-    webConnector->makeAuth();
-    connect(webConnector, &WebConnector::valueChanged, this, [this]() {
-        QNetworkRequest request = webConnector->createRequest("https://api.barybians.ru/v2/posts", WebConnector::GET_FEED);
-    webConnector->sendRequest(request, WebConnector::GET_FEED);
-    connect(webConnector, &WebConnector::feedOk, this, [this]() {
-       QVector<Post*> *secVec = webConnector->getFeed();
-
-       for(auto i : *secVec) {
-           qDebug() << i->userId;
-           if(i->userId == webConnector->mainUser->id) {
-               qDebug() << "KEKEKEKEKE";
-            auto *widget = new CardWidget(this);
-            auto *layout = new QVBoxLayout(this);
-            auto *title = new QLabel("<b>" + i->title + "</b>");
-            title->setWordWrap(true);
-            auto *text = new QLabel(i->text);
-            text->setTextFormat(Qt::RichText);
-            text->setWordWrap(true);
-            layout->addWidget(title);
-            layout->addWidget(text);
-            widget->setLayout(layout);
-            menuContainer->addWidget(widget);
-           }
-       }
-       this->setLayout(scrollContainerLayout);
-    });
-});
-}
-
-
-void UserPageFragment::bindWebConnector(WebConnector *webConnectorCopy) {
-    this->webConnector = webConnectorCopy;
-    qDebug() << "Totoken:" << webConnector->token;
-    downloadFeed();
-
-
-}
-void UserPageFragment::bindData(BaseModel *model) {
-    User *mainUser = (User *) model;
-
-    this->fullName->setText(mainUser->name + " " + mainUser->lastName);
-    qDebug() << "main_user_name:" << mainUser->name;
-    this->fullName->setStyleSheet("background:none");
-//    this->picture->setPixmap(QPixmap(mainUser->photoName));
-    QFile fileName(":/drawable/main_user_photo.png");
-    if(fileName.open(QFile::ReadOnly)) {
-        QPixmap pixMap;
-        pixMap.loadFromData(fileName.readAll());
-
-        this->picture->setPixmap(pixMap);
-    }
-    this->picture->setAlignment(Qt::AlignCenter);
-    this->picture->setStyleSheet("background:none");
-
-    this->status->setText(mainUser->status);
-    this->status->setStyleSheet("background:none");
-
-    this->lastVisit->setText(mainUser->lastVisit);
-    this->lastVisit->setStyleSheet("background:none");
-}
-

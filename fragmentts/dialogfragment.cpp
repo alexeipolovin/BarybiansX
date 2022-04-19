@@ -5,7 +5,8 @@
 #include "dialogfragment.h"
 #include "cwidgets/addition/cardwidget.h"
 
-DialogFragment::DialogFragment() {
+DialogFragment::DialogFragment(int id) {
+    this->id = id;
     auto *mainLayout = new QVBoxLayout();
     CardWidget *cardWidget = new CardWidget();
     mainLayout->addWidget(cardWidget);

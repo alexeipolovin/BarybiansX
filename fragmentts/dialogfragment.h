@@ -7,10 +7,11 @@
 
 class DialogFragment: public BaseFragment {
 public:
-    DialogFragment();
+    DialogFragment(int id);
     ~DialogFragment();
 
 
+    int id;
 };
 
 

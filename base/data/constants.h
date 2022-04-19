@@ -31,7 +31,6 @@ enum SCREEN {
 
 enum REQUEST_TYPE {
     AUTH,
-
-};
+    };
 
 #endif // CONSTANTS_H

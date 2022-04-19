@@ -2,6 +2,7 @@
 #include "fragmentts/editorsplashfragment.h"
 #include "cwidgets/addition/EditorWindow.h"
 #include "fragmentts/feedfragment.h"
+#include "fragmentts/dialogfragment.h"
 
 #include <QString>
 
@@ -14,6 +15,10 @@
 ImplFragmentFactory::ImplFragmentFactory() = default;
 ImplFragmentFactory::~ImplFragmentFactory() = default;
 
+void ImplFragmentFactory::setDialogId(int id) {
+    this->id = id;
+}
+
 BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
     qDebug("ScreensFactory create");
     switch (tag) {
@@ -24,6 +29,7 @@ BaseFragment* ImplFragmentFactory::create(SCREEN tag) {
     case USER_PAGE:
         return new UserPageFragment;
     case DIALOG_WITH:
+        return new DialogFragment(this->id);
         break;
     case EDITOR_SPLASH:
         return new EditorSplashFragment;

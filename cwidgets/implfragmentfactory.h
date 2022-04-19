@@ -11,9 +11,13 @@ public:
     ImplFragmentFactory();
     ~ImplFragmentFactory();
 
+    int id = 4;
+
 //    BaseFragment* create(QString tag) override;
     SCREEN createStart() override;
     BaseFragment *create(SCREEN tag) override;
+
+    void setDialogId(int id);
 };
 
 #endif // IMPLFRAGMENTFACTORY_H

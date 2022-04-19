@@ -17,22 +17,26 @@ public:
 
     void bindWebConnector(WebConnector *webConnector) override;
 
-    WebConnector *webConnector;
-    QVBoxLayout *menuContainer;
-    QVBoxLayout *scrollContainerLayout;
+    WebConnector *webConnector{};
+//    QVBoxLayout *menuContainer{};
+//    QVBoxLayout *scrollContainerLayout{};
+//    QScrollArea *scrollArea{};
+//    QWidget *scrolConttent{};
+//    QVBoxLayout *mainContainerLaout{};
+//    QFrame *mainContainerFrame{};
+//    QVBoxLayout *backContainerLaout{};
+//    QFrame *backGradient{};
+//    QHBoxLayout *profilelay{};
+//    QVBoxLayout *namelay{};
+//    QVBoxLayout *headerLayout{};
+//    QLabel *status{};
+//    QLabel *fullName{};
+//    QLabel *lastVisit{};
+//    QLabel *picture{};
+    QWidget *scrollableArea;
     QScrollArea *scrollArea;
-    QWidget *scrolConttent;
-    QVBoxLayout *mainContainerLaout;
-    QFrame *mainContainerFrame;
-    QVBoxLayout *backContainerLaout;
-    QFrame *backGradient;
-    QHBoxLayout *profilelay;
-    QVBoxLayout *namelay;
-    QVBoxLayout *headerLayout;
-    QLabel *status;
-    QLabel *fullName;
-    QLabel *lastVisit;
-    QLabel *picture;
+    QVBoxLayout *mainLayout;
+    QVBoxLayout *anotherLay;
     void downloadFeed();
 };
 

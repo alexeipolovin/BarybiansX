@@ -28,7 +28,7 @@ public:
     };
 
     User *mainUser;
-    User getMainUser() const;
+    User * getMainUser() const;
 
     QString token;
 
@@ -71,7 +71,7 @@ public:
 
     void writePost(const QString& title, const QString& text);
     void sendPostRequest(const QNetworkRequest& request, WebConnector::REQUEST_TYPE type);
-    User *getMainUser();
+    User *getMainUser() const;
     QVector<Post *> getSpecificFeed(int userId);
     void getUserWithId(int id);
     void getAllUsers();

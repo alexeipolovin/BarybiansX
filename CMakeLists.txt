@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.15)
 project(BarybiansX)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets Network REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Widgets Network REQUIRED)
 AUX_SOURCE_DIRECTORY(base/, BASE_SOURCES)
 AUX_SOURCE_DIRECTORY(cwidgets/, CWIDGETS_SOURCES)
 AUX_SOURCE_DIRECTORY(fragmentts/, FRAGMENTTS_SOURCES)
@@ -50,12 +50,10 @@ add_executable(BarybiansX
         base/data/data.cpp
         res.qrc
         fragmentts/dialogfragment.cpp fragmentts/dialogfragment.h cwidgets/addition/EditorWindow.cpp cwidgets/addition/EditorWindow.h fragmentts/editorsplashfragment.cpp fragmentts/editorsplashfragment.h meditorsplash.cpp meditorsplash.h fragmentts/feedfragment.cpp fragmentts/feedfragment.h)
-find_package(Qt6Core REQUIRED)
-find_package(Qt6Widgets REQUIRED)
-find_package(Qt6Network REQUIRED)
-find_package(Qt6WebSockets REQUIRED)
-find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
-target_link_libraries(BarybiansX PRIVATE Qt6::SvgWidgets)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
+find_package(Qt5WebSockets REQUIRED)
 target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Gui)
 target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(BarybiansX PRIVATE Qt${QT_VERSION_MAJOR}::Network)

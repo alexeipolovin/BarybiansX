@@ -7,7 +7,6 @@
 #include <QPixmap>
 #include <QPropertyAnimation>
 #include <QResizeEvent>
-#include <QSvgWidget>
 #include <qfont.h>
 #include <qlabel.h>
 #include <qpushbutton.h>

@@ -12,6 +12,7 @@
 #include <QThread>
 #include <QSettings>
 #include <utility>
+#include <QUuid>
 
 const QByteArray HEADER_APP_TYPE = "application/x-www-form-urlencoded";
 const QByteArray AUTHORIZATION = "Authorization";
@@ -496,7 +497,7 @@ QString WebConnector::getToken() const {
 QVector <Post *> WebConnector::getSpecificFeed(int userId) {
 }
 
-User *WebConnector::getMainUser() {
+User *WebConnector::getMainUser() const {
     return this->mainUser;
 }
 

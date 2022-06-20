@@ -1,7 +1,6 @@
 #include "splashfragment.h"
 
 #include <QLabel>
-#include <QSvgWidget>
 #include <QTimer>
 #include <base/data/constants.h>
 #include <QMovie>

@@ -1,8 +1,6 @@
 <RCC>
     <qresource prefix="/drawable">
-        <file>splash.svg</file>
         <file>flex.png</file>
-        <file>main_user_photo.png</file>
         <file>resources/005-bold.png</file>
         <file>resources/007-clear format.png</file>
         <file>resources/010-file.png</file>
